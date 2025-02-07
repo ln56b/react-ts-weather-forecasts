@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
-import { FormData } from "../types/form";
+import { FormData, LocationFormSchema } from "../types/form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface LocationFormProps {
   setLocation: (location: string) => void;
@@ -12,7 +13,9 @@ export default function LocationForm({ setLocation }: LocationFormProps) {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    resolver: zodResolver(LocationFormSchema),
+  });
 
   const onSubmit = async (data: FormData) => {
     setLocation(data.location);
