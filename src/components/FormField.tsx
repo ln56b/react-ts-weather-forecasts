@@ -13,7 +13,7 @@ const FormField: React.FC<FormFieldProps> = ({
       type={type}
       placeholder={placeholder}
       {...register(name, { valueAsNumber })}
-      className="p-2 border border-gray-400 rounded-lg"
+      className="px-4 py-2 text-[#1c73af] bg-white border-gray-400 w-76 rounded-3xl"
     />
     {error && <p className="text-red-500">{error.message}</p>}
   </>

@@ -24,16 +24,18 @@ export default function LocationForm({ setLocation }: LocationFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h1 className="mb-4 text-3xl font-bold text-center">Choose a location</h1>
-      <div className="flex flex-wrap items-center justify-center gap-2 pt-2 mb-4">
-        <FormField
-          type="text"
-          placeholder="Location"
-          name="location"
-          register={register}
-          error={errors.location}
-        />
-        <button type="submit" className="p-2 text-white bg-blue-600 rounded-lg">
-          Submit
+      <div className="flex flex-wrap items-baseline justify-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2 pt-2 mb-4 ">
+          <FormField
+            type="text"
+            placeholder="Enter a City"
+            name="location"
+            register={register}
+            error={errors.location}
+          />
+        </div>
+        <button type="submit">
+          <i className="text-xl cursor-pointer fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
     </form>
