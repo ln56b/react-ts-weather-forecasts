@@ -6,10 +6,7 @@ import { Location } from "../types/forecast";
 import { FormData, LocationFormSchema } from "../types/form";
 import FormField from "./FormField";
 
-export type DisplayedLocation = Pick<
-  Location,
-  "id" | "name" | "region" | "country"
->;
+export type DisplayedLocation = Pick<Location, "name" | "region" | "country">;
 interface LocationFormProps {
   location: string;
   setLocation: (location: string) => void;
@@ -51,7 +48,6 @@ export default function LocationForm({
 
     setSuggestions(
       data?.map((location) => ({
-        id: location.id,
         name: location.name,
         region: location.region,
         country: location.country,
@@ -101,9 +97,9 @@ export default function LocationForm({
       {showDropdown && (
         <div className="absolute z-10 mt-12 transform -translate-x-1/2 -translate-y-1/2 bg-white border border-gray-300 rounded-md shadow-lg top-1/2, left-1/2 w-76">
           <ul id="locations" className="divide-y divide-gray-300">
-            {suggestions.map((location) => (
+            {suggestions.map((location, index) => (
               <li
-                key={location.id}
+                key={index}
                 className="px-4 py-2 text-[#1c73af] cursor-pointer hover:bg-gray-100"
                 onClick={() => handleSelectSuggestion(location)}
               >
