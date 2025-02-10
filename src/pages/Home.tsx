@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div>
-      <LocationForm setLocation={setLocation} />
+      <LocationForm location={location} setLocation={setLocation} />
       {loading ? (
         <p>Loading...</p>
       ) : error ? (

@@ -6,11 +6,19 @@ import { Location } from "../types/forecast";
 import { FormData, LocationFormSchema } from "../types/form";
 import FormField from "./FormField";
 
+export type DisplayedLocation = Pick<
+  Location,
+  "id" | "name" | "region" | "country"
+>;
 interface LocationFormProps {
+  location: string;
   setLocation: (location: string) => void;
 }
 
-export default function LocationForm({ setLocation }: LocationFormProps) {
+export default function LocationForm({
+  location,
+  setLocation,
+}: LocationFormProps) {
   const {
     register,
     resetField,
@@ -22,9 +30,7 @@ export default function LocationForm({ setLocation }: LocationFormProps) {
   });
 
   const [search, setSearch] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<
-    Pick<Location, "id" | "name" | "region" | "country">[]
-  >([]);
+  const [suggestions, setSuggestions] = useState<DisplayedLocation[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const apiKey = import.meta.env.VITE_API_KEY;
@@ -54,10 +60,7 @@ export default function LocationForm({ setLocation }: LocationFormProps) {
     setShowDropdown(true);
   };
 
-  const handleSelectSuggestion = (
-    selectedLocation: Pick<Location, "id" | "name" | "region" | "country">
-  ) => {
-    setSearch(selectedLocation.name);
+  const handleSelectSuggestion = (selectedLocation: DisplayedLocation) => {
     setLocation(selectedLocation.name);
     setSuggestions([]);
     setShowDropdown(false);
@@ -89,7 +92,7 @@ export default function LocationForm({ setLocation }: LocationFormProps) {
         <button
           type="submit"
           className="disabled:opacity-50"
-          disabled={!search}
+          disabled={!location}
         >
           <i className="text-xl cursor-pointer fa-solid fa-magnifying-glass"></i>
         </button>
