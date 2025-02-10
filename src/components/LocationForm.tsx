@@ -68,6 +68,7 @@ export default function LocationForm({
 
   const onSubmit = async (data: FormData) => {
     setLocation(data.location);
+    setSearch("");
   };
 
   return (

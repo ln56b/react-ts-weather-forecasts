@@ -3,6 +3,7 @@ import ForecastCard from "../components/ForecastCard";
 import useFetch from "../hooks/useFetch";
 import LocationForm from "../components/LocationForm";
 import { Forecast } from "../types/forecast";
+import AstroCard from "../components/AstroCard";
 
 export default function Home() {
   const [location, setLocation] = useState("");
@@ -14,7 +15,7 @@ export default function Home() {
   };
   const url =
     location && isValidLocation(location)
-      ? `${apiUrl}current.json?key=${apiKey}&q=${location}`
+      ? `${apiUrl}forecast.json?key=${apiKey}&q=${location}`
       : "";
 
   const { data, loading, error } = useFetch<Forecast>(url);
@@ -27,7 +28,12 @@ export default function Home() {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : (
-        data && <ForecastCard forecast={data} />
+        data && (
+          <>
+            <ForecastCard forecast={data} />
+            <AstroCard astro={data.forecast.forecastday[0].astro} />
+          </>
+        )
       )}
       {!location && (
         <h1 className="mt-10 text-lg italic text-center text-gray-200">
