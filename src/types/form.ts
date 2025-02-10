@@ -12,6 +12,7 @@ export type FormFieldProps = {
   register: UseFormRegister<FormData>;
   error: FieldError | undefined;
   valueAsNumber?: boolean;
+  additionalProps?: Record<string, unknown>;
 };
 
 export type ValidFieldNames = "location";

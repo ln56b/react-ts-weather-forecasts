@@ -31,7 +31,6 @@ function useFetch<T>(url: string) {
 
     fetchData();
   }, [url]);
-  console.log("data", data);
   return { data, loading, error };
 }
 

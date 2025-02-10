@@ -45,3 +45,13 @@ export type Forecast = {
     gust_kph: number;
   };
 };
+
+export type Location = {
+  id: number;
+  name: string;
+  region: string;
+  country: string;
+  lat: number;
+  lon: number;
+  url: string;
+};

@@ -14,7 +14,7 @@ export default function Home() {
   };
   const url =
     location && isValidLocation(location)
-      ? `${apiUrl}?key=${apiKey}&q=${location}`
+      ? `${apiUrl}current.json?key=${apiKey}&q=${location}`
       : "";
 
   const { data, loading, error } = useFetch<Forecast>(url);
@@ -28,6 +28,11 @@ export default function Home() {
         <p>Error: {error.message}</p>
       ) : (
         data && <ForecastCard forecast={data} />
+      )}
+      {!location && (
+        <h1 className="mt-10 text-lg italic text-center text-gray-200">
+          Start by entering a city
+        </h1>
       )}
     </div>
   );
