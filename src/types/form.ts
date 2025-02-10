@@ -1,4 +1,9 @@
-import { FieldError, UseFormRegister } from "react-hook-form";
+import {
+  FieldError,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormResetField,
+} from "react-hook-form";
 import { z, ZodType } from "zod";
 
 export type FormData = {
@@ -10,6 +15,8 @@ export type FormFieldProps = {
   placeholder: string;
   name: ValidFieldNames;
   register: UseFormRegister<FormData>;
+  resetField: UseFormResetField<FormData>;
+  getValues: UseFormGetValues<FormData>;
   error: FieldError | undefined;
   valueAsNumber?: boolean;
   additionalProps?: Record<string, unknown>;

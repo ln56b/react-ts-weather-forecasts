@@ -13,9 +13,10 @@ interface LocationFormProps {
 export default function LocationForm({ setLocation }: LocationFormProps) {
   const {
     register,
+    resetField,
+    getValues,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<FormData>({
     resolver: zodResolver(LocationFormSchema),
   });
@@ -76,15 +77,20 @@ export default function LocationForm({ setLocation }: LocationFormProps) {
             placeholder="Enter a City"
             name="location"
             register={register}
+            resetField={resetField}
+            getValues={getValues}
             error={errors.location}
             additionalProps={{
-              value: search,
               onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
                 handleAutocomplete(e.target.value),
             }}
           />
         </div>
-        <button type="submit">
+        <button
+          type="submit"
+          className="disabled:opacity-50"
+          disabled={!search}
+        >
           <i className="text-xl cursor-pointer fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
