@@ -10,7 +10,7 @@ export default function AstroMetric({
   return (
     <>
       <div className="flex items-center justify-around w-[200px] p-2 my-1 bg-[#1c73af] rounded-lg">
-        <i className={`text-3xl fa-solid ${icon}`}></i>
+        <img src={icon} className="w-20 h-auto px-1" />
 
         <div className="flex flex-col items-end">
           <p className="text-xl text-amber-500">{metric}</p>

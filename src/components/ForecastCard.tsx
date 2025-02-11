@@ -1,5 +1,5 @@
 import { Forecast } from "../types/forecast";
-import ForecastMetricCard from "./ForecastMetricCard";
+import ForecastMetric from "./ForecastMetric";
 
 export default function ForecastCard({ forecast }: { forecast: Forecast }) {
   return (
@@ -14,21 +14,21 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
       </div>
 
       <div className="flex flex-col items-center justify-center p-4 my-2 mx-auto rounded-lg shadow-2xl bg-[#1c73af] w-[30rem]">
-        <ForecastMetricCard
+        <ForecastMetric
           metric={forecast.current.temp_c}
           unit={"°C"}
           label="Temperature"
           icon="fa-temperature-three-quarters"
         />
 
-        <ForecastMetricCard
+        <ForecastMetric
           metric={forecast.current.wind_kph}
           unit={"kph"}
           label="Wind"
           icon="fa-wind"
         />
 
-        <ForecastMetricCard
+        <ForecastMetric
           metric={forecast.current.humidity}
           unit={"%"}
           label="Humidity"

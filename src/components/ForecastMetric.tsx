@@ -1,4 +1,4 @@
-export default function ForecastMetricCard({
+export default function ForecastMetric({
   metric,
   unit,
   label,
