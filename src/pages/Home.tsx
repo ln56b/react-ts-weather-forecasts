@@ -1,25 +1,23 @@
-import { useState } from "react";
+import AstroCard from "../components/AstroCard";
 import ForecastCard from "../components/ForecastCard";
-import useFetch from "../hooks/useFetch";
 import LocationForm from "../components/LocationForm";
 import { Forecast } from "../types/forecast";
-import AstroCard from "../components/AstroCard";
 
-export default function Home() {
-  const [location, setLocation] = useState("");
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const apiKey = import.meta.env.VITE_API_KEY;
+interface HomeProps {
+  location: string;
+  setLocation: (location: string) => void;
+  loading: boolean;
+  error: Error | null;
+  data: Forecast | null;
+}
 
-  const isValidLocation = (location: string): boolean => {
-    return /^[a-zA-Z\s]*$/.test(location);
-  };
-  const url =
-    location && isValidLocation(location)
-      ? `${apiUrl}forecast.json?key=${apiKey}&q=${location}`
-      : "";
-
-  const { data, loading, error } = useFetch<Forecast>(url);
-
+export default function Home({
+  location,
+  setLocation,
+  loading,
+  error,
+  data,
+}: HomeProps) {
   return (
     <div>
       <LocationForm location={location} setLocation={setLocation} />
