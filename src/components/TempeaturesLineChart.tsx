@@ -1,5 +1,5 @@
-import { WeatherHistory } from "@/types/forecast";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { WeatherForecast } from "@/types/forecast";
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -14,12 +14,18 @@ import {
   ChartTooltipContent,
 } from "./ui/chart";
 
-export default function HistoryBarChart({
-  history,
-}: {
-  history: WeatherHistory[];
-}) {
-  const chartData = [...history]?.reverse().map((history: WeatherHistory) => ({
+interface ForecastLineChartProps {
+  forecast: WeatherForecast[];
+  isFuture: boolean;
+  days: number;
+}
+
+export default function TemperaturesLineChart({
+  forecast,
+  isFuture,
+  days,
+}: ForecastLineChartProps) {
+  const chartData = [...forecast]?.map((history: WeatherForecast) => ({
     date: history.forecast.forecastday[0].date,
     mintemp: history.forecast.forecastday[0].day.mintemp_c,
     maxtemp: history.forecast.forecastday[0].day.maxtemp_c,
@@ -42,26 +48,43 @@ export default function HistoryBarChart({
         <Card>
           <CardHeader>
             <CardTitle>C° Temperatures </CardTitle>
-            <CardDescription>Past 7 days</CardDescription>
+            <CardDescription>
+              {isFuture
+                ? `${days} days forecast ahead (in 2 weeks time)`
+                : `Past ${days} days`}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig}>
-              <BarChart accessibilityLayer data={chartData}>
+              <LineChart accessibilityLayer data={chartData}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="date"
                   tickLine={true}
-                  tickMargin={10}
+                  tickMargin={8}
                   axisLine={false}
                   tickFormatter={(value) => value.slice(5)}
                 />
+
                 <ChartTooltip
                   cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
+                  content={<ChartTooltipContent />}
                 />
-                <Bar dataKey="mintemp" fill="var(--color-mintemp)" radius={4} />
-                <Bar dataKey="maxtemp" fill="var(--color-maxtemp)" radius={4} />
-              </BarChart>
+                <Line
+                  dataKey="mintemp"
+                  stroke="var(--color-mintemp)"
+                  type="monotone"
+                  strokeWidth={2}
+                  dot={true}
+                />
+                <Line
+                  dataKey="maxtemp"
+                  stroke="var(--color-maxtemp)"
+                  type="monotone"
+                  strokeWidth={2}
+                  dot={true}
+                />
+              </LineChart>
             </ChartContainer>
           </CardContent>
         </Card>

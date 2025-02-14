@@ -1,11 +1,11 @@
-import useFetch from "@/hooks/useFetch";
-import LocationForm from "../components/LocationForm";
-import { Forecast } from "../types/forecast";
-import { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CurrentWeather from "@/components/CurrentWeather";
 import Astronomy from "@/components/Astronomy";
-import History from "@/components/History";
+import CurrentWeather from "@/components/CurrentWeather";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useFetch from "@/hooks/useFetch";
+import { useState } from "react";
+import LocationForm from "@/components/LocationForm";
+import { Forecast } from "@/types/forecast";
+import ForecastTrends from "@/components/ForecastTrends";
 
 export default function Home() {
   const [location, setLocation] = useState("");
@@ -38,15 +38,19 @@ export default function Home() {
               defaultValue="astronomy"
               className="w-full p-4 mt-10 text-center"
             >
-              <TabsList>
+              <TabsList className="px-4 m-4">
                 <TabsTrigger value="astronomy">Astronomy</TabsTrigger>
+                <TabsTrigger value="future">Future</TabsTrigger>
                 <TabsTrigger value="history">History</TabsTrigger>
               </TabsList>
               <TabsContent value="astronomy">
                 <Astronomy astro={data.forecast.forecastday[0].astro} />
               </TabsContent>
+              <TabsContent value="future">
+                <ForecastTrends location={location} isFuture={true} days={7} />
+              </TabsContent>
               <TabsContent value="history">
-                <History location={location} />
+                <ForecastTrends location={location} isFuture={false} days={7} />
               </TabsContent>
             </Tabs>
           </>

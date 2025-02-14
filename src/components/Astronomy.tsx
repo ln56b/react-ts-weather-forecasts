@@ -8,8 +8,8 @@ export interface AstronomyProps {
 export default function Astronomy({ astro }: AstronomyProps) {
   return (
     <section className="flex flex-col items-center justify-center">
-      <h2 className="mt-4 text-2xl font-semibold text-center">Astronomy</h2>
-      <div className="flex gap-1 items-center justify-center p-4 m-4 rounded-lg shadow-2xl bg-[#3796d7] lg:max-w-3/5 flex-wrap">
+      <h2 className="my-4 text-2xl font-semibold text-center">Astronomy</h2>
+      <div className="flex gap-1 items-center justify-center p-4 mx-4 rounded-lg shadow-2xl bg-[#3796d7] lg:max-w-3/5 flex-wrap">
         <AstroMetric
           metric={astro.sunrise}
           label="Sunrise"
