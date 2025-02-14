@@ -3,6 +3,14 @@ import { WeatherForecast } from "@/types/forecast";
 import { generateFetchForecastUrl } from "@/utils/url-generator";
 import { useMemo } from "react";
 import TemperaturesLineChart from "./TempeaturesLineChart";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./ui/carousel";
+import { Card, CardContent } from "./ui/card";
 
 interface ForecastLineChartProps {
   location: string;
@@ -29,19 +37,37 @@ export default function ForecastTrends({
   const { data, loading, error } = useFetchMultiple<WeatherForecast>(urls);
 
   return (
-    <div>
-      <h2 className="my-4 text-2xl font-semibold text-center">History</h2>
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="my-4 text-2xl font-semibold text-center">
+        {isFuture ? "Future" : "History"}
+      </h2>
 
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : data?.length ? (
-        <TemperaturesLineChart
-          forecast={data}
-          isFuture={isFuture}
-          days={days}
-        />
+        <Carousel className="w-full max-w-lg">
+          <CarouselContent>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <CarouselItem key={index}>
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex items-center justify-center">
+                      <TemperaturesLineChart
+                        forecast={data}
+                        isFuture={isFuture}
+                        days={days}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       ) : (
         <p>No data available</p>
       )}
