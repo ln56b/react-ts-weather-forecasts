@@ -2,11 +2,6 @@
 
 @plugin "tailwindcss-animate";
 
-@custom-variant dark (&:is(.dark *));
-
-* {
-  font-family: Poppins, sans-serif;
-}
 
 body {
   margin: 0;
@@ -15,23 +10,28 @@ body {
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
-    rgba(3, 67, 112, 1) 0%,
-    rgba(28, 115, 175, 1) 67%,
-    rgba(47, 115, 131, 1) 100%
+    hsl(205, 95%, 23%) 0%,
+    hsl(204, 72%, 40%) 67%,
+    hsl(191, 47%, 35%) 100%
   );
 
   color: white;
 }
 
 :root {
+  font-family: Poppins, sans-serif;
+
+}
+
+@theme {
   --background: hsl(0 0% 100%);
   --foreground: hsl(0 0% 3.9%);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(0 0% 3.9%);
   --popover: hsl(0 0% 100%);
   --popover-foreground: hsl(0 0% 3.9%);
-  --primary: hsl(0 0% 9%);
-  --primary-foreground: hsl(0 0% 98%);
+  --primary: hsl(191, 47%, 35%),
+  --color-primary-foreground: hsl(204, 72%, 40%);
   --secondary: hsl(0 0% 96.1%);
   --secondary-foreground: hsl(0 0% 9%);
   --muted: hsl(0 0% 96.1%);
@@ -49,34 +49,9 @@ body {
   --chart-4: hsl(43 74% 66%);
   --chart-5: hsl(27 87% 67%);
   --radius: 0.6rem;
+  --warning-foreground: hsl(38, 100%, 63%);
 }
 
-.dark {
-  --background: hsl(0 0% 3.9%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(0 0% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(0 0% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
-  --primary: hsl(0 0% 98%);
-  --primary-foreground: hsl(0 0% 9%);
-  --secondary: hsl(0 0% 14.9%);
-  --secondary-foreground: hsl(0 0% 98%);
-  --muted: hsl(0 0% 14.9%);
-  --muted-foreground: hsl(0 0% 63.9%);
-  --accent: hsl(0 0% 14.9%);
-  --accent-foreground: hsl(0 0% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(0 0% 14.9%);
-  --input: hsl(0 0% 14.9%);
-  --ring: hsl(0 0% 83.1%);
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(160 60% 45%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(340 75% 55%);
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -109,11 +84,5 @@ body {
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
+
