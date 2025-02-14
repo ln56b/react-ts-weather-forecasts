@@ -35,7 +35,7 @@ export default function Home() {
             <CurrentWeather forecast={data} />
 
             <Tabs
-              defaultValue="account"
+              defaultValue="astronomy"
               className="w-full p-4 mt-10 text-center"
             >
               <TabsList>

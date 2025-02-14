@@ -4,7 +4,7 @@ import WeatherMetric from "./WeatherMetric";
 export default function CurrentWeather({ forecast }: { forecast: Forecast }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center p-4 mx-auto rounded-lg shadow-2xl bg-[#1c73af]  w-[30rem]">
+      <div className="flex flex-col items-center justify-center p-4 mx-auto rounded-lg shadow-2xl bg-[#1c73af] w-[30rem]">
         <h1 className="text-3xl font-semibold ">{forecast.location.name}</h1>
         <p className="text-lg ">
           {forecast.location.region} - {forecast.location.country}

@@ -136,3 +136,10 @@ export type ForecastDay = {
   day: DayWeather;
   hour: HourWeather[];
 };
+
+export type WeatherHistory = {
+  forecast: {
+    forecastday: ForecastDay[];
+  };
+  location: Location;
+};
