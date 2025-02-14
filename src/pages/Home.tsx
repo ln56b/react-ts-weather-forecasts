@@ -1,10 +1,11 @@
 import useFetch from "@/hooks/useFetch";
-import AstroCard from "../components/AstroCard";
-import ForecastCard from "../components/ForecastCard";
 import LocationForm from "../components/LocationForm";
 import { Forecast } from "../types/forecast";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import CurrentWeather from "@/components/CurrentWeather";
+import Astronomy from "@/components/Astronomy";
+import History from "@/components/History";
 
 export default function Home() {
   const [location, setLocation] = useState("");
@@ -31,22 +32,21 @@ export default function Home() {
       ) : (
         data && (
           <>
-            <ForecastCard forecast={data} />
+            <CurrentWeather forecast={data} />
 
             <Tabs
               defaultValue="account"
               className="w-full p-4 mt-10 text-center"
             >
               <TabsList>
-                <TabsTrigger value="account">Astronomy</TabsTrigger>
-                <TabsTrigger value="password">Forecast</TabsTrigger>
-                <TabsTrigger value="password">History</TabsTrigger>
+                <TabsTrigger value="astronomy">Astronomy</TabsTrigger>
+                <TabsTrigger value="history">History</TabsTrigger>
               </TabsList>
-              <TabsContent value="account">
-                <AstroCard astro={data.forecast.forecastday[0].astro} />
+              <TabsContent value="astronomy">
+                <Astronomy astro={data.forecast.forecastday[0].astro} />
               </TabsContent>
-              <TabsContent value="password">
-                Change your password here.
+              <TabsContent value="history">
+                <History location={location} />
               </TabsContent>
             </Tabs>
           </>

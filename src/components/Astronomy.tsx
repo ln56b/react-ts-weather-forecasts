@@ -1,11 +1,11 @@
 import { Astro } from "../types/forecast";
 import AstroMetric from "./AstroMetric";
 
-export interface AstroCardProps {
+export interface AstronomyProps {
   astro: Astro;
 }
 
-export default function AstroCard({ astro }: AstroCardProps) {
+export default function Astronomy({ astro }: AstronomyProps) {
   return (
     <section className="flex flex-col items-center justify-center">
       <h2 className="mt-4 text-2xl font-semibold text-center">Astronomy</h2>

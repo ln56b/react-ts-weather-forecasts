@@ -1,4 +1,4 @@
-export default function ForecastMetric({
+export default function WeatherMetric({
   metric,
   unit,
   label,
