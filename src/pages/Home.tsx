@@ -1,23 +1,26 @@
+import useFetch from "@/hooks/useFetch";
 import AstroCard from "../components/AstroCard";
 import ForecastCard from "../components/ForecastCard";
 import LocationForm from "../components/LocationForm";
 import { Forecast } from "../types/forecast";
+import { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-interface HomeProps {
-  location: string;
-  setLocation: (location: string) => void;
-  loading: boolean;
-  error: Error | null;
-  data: Forecast | null;
-}
+export default function Home() {
+  const [location, setLocation] = useState("");
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiKey = import.meta.env.VITE_API_KEY;
 
-export default function Home({
-  location,
-  setLocation,
-  loading,
-  error,
-  data,
-}: HomeProps) {
+  const isValidLocation = (location: string): boolean => {
+    return /^[a-zA-Z\s]*$/.test(location);
+  };
+  const url =
+    location && isValidLocation(location)
+      ? `${apiUrl}forecast.json?key=${apiKey}&q=${location}`
+      : "";
+
+  const { data, loading, error } = useFetch<Forecast>(url);
+
   return (
     <div>
       <LocationForm location={location} setLocation={setLocation} />
@@ -29,7 +32,23 @@ export default function Home({
         data && (
           <>
             <ForecastCard forecast={data} />
-            <AstroCard astro={data.forecast.forecastday[0].astro} />
+
+            <Tabs
+              defaultValue="account"
+              className="w-full p-4 mt-10 text-center"
+            >
+              <TabsList>
+                <TabsTrigger value="account">Astronomy</TabsTrigger>
+                <TabsTrigger value="password">Forecast</TabsTrigger>
+                <TabsTrigger value="password">History</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                <AstroCard astro={data.forecast.forecastday[0].astro} />
+              </TabsContent>
+              <TabsContent value="password">
+                Change your password here.
+              </TabsContent>
+            </Tabs>
           </>
         )
       )}
