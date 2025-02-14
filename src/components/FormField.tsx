@@ -1,4 +1,5 @@
 import { FormFieldProps } from "../types/form";
+import { Input } from "./ui/input";
 
 const FormField: React.FC<FormFieldProps> = ({
   type,
@@ -12,13 +13,13 @@ const FormField: React.FC<FormFieldProps> = ({
   additionalProps,
 }) => (
   <div className="relative">
-    <input
+    <Input
       type={type}
       placeholder={placeholder}
       {...register(name, { valueAsNumber })}
       {...additionalProps}
-      className="px-4 py-2 text-[#1c73af] bg-white border-gray-400 w-76 rounded-3xl"
     />
+
     {getValues(name) && (
       <button
         type="button"
