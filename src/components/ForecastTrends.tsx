@@ -2,7 +2,6 @@ import useFetchMultiple from "@/hooks/useFetchMultiple";
 import { WeatherForecast } from "@/types/forecast";
 import { generateFetchForecastUrl } from "@/utils/url-generator";
 import { useMemo } from "react";
-import TemperaturesLineChart from "./TempeaturesLineChart";
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +10,8 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { Card, CardContent } from "./ui/card";
+import TemperaturesChart from "./TemperaturesChart";
+import PrecipitationsChart from "./PrecipitationsChart";
 
 interface ForecastLineChartProps {
   location: string;
@@ -49,21 +50,33 @@ export default function ForecastTrends({
       ) : data?.length ? (
         <Carousel className="w-full max-w-lg">
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex items-center justify-center">
-                      <TemperaturesLineChart
-                        forecast={data}
-                        isFuture={isFuture}
-                        days={days}
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
+            <CarouselItem>
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex items-center justify-center">
+                    <TemperaturesChart
+                      forecast={data}
+                      isFuture={isFuture}
+                      days={days}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+
+            <CarouselItem>
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex items-center justify-center">
+                    <PrecipitationsChart
+                      forecast={data}
+                      isFuture={isFuture}
+                      days={days}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

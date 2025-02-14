@@ -1,5 +1,5 @@
 import { WeatherForecast } from "@/types/forecast";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -14,22 +14,26 @@ import {
   ChartTooltipContent,
 } from "./ui/chart";
 
-interface ForecastLineChartProps {
+interface TemperaturesChart {
   forecast: WeatherForecast[];
   isFuture: boolean;
   days: number;
 }
 
-export default function TemperaturesLineChart({
+export default function TemperaturesChart({
   forecast,
   isFuture,
   days,
-}: ForecastLineChartProps) {
-  const chartData = [...forecast]?.map((history: WeatherForecast) => ({
+}: TemperaturesChart) {
+  let chartData = [...forecast]?.map((history: WeatherForecast) => ({
     date: history.forecast.forecastday[0].date,
     mintemp: history.forecast.forecastday[0].day.mintemp_c,
     maxtemp: history.forecast.forecastday[0].day.maxtemp_c,
   }));
+
+  if (!isFuture) {
+    chartData = [...chartData].reverse();
+  }
 
   const chartConfig = {
     mintemp: {
@@ -58,6 +62,7 @@ export default function TemperaturesLineChart({
             <ChartContainer config={chartConfig}>
               <LineChart accessibilityLayer data={chartData}>
                 <CartesianGrid vertical={false} />
+                <YAxis tickLine={false} axisLine={false} />
                 <XAxis
                   dataKey="date"
                   tickLine={true}
