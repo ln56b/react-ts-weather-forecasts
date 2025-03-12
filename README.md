@@ -18,3 +18,8 @@
 - Zod for schema validation
 - TailwindCSS
 - Shadcn/ui
+
+# Aperçu du projet
+
+https://github.com/user-attachments/assets/83c1caae-0ff2-4274-957a-b42f001cf791
+
